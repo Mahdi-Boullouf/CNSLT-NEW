@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 433.24 251.59">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 30.58px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #d8e1e5;
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+      }
+
+      .cls-3 {
+        fill: #bf9443;
+      }
+
+      .cls-3, .cls-4 {
+        font-family: MyriadPro-Bold, 'Myriad Pro';
+        font-size: 67.01px;
+        font-weight: 700;
+      }
+
+      .cls-4 {
+        fill: #bf9444;
+      }
+
+      .cls-2 {
+        font-size: 37.01px;
+      }
+    </style>
+  </defs>
+  <text transform="translate(0 56.09)"><tspan><tspan class="cls-4" x="0" y="0">Welcome</tspan><tspan class="cls-3" x="271.66" y="0"> </tspan><tspan class="cls-2" x="285.2" y="0">to the </tspan></tspan><tspan class="cls-2"><tspan x="0" y="65.49">CNSLT Dashboard.</tspan></tspan><tspan class="cls-1"><tspan x="0" y="126.67">Manage your site efciently and </tspan></tspan><tspan class="cls-1"><tspan x="0" y="187.85">efortlessly.</tspan></tspan></text>
+</svg>
