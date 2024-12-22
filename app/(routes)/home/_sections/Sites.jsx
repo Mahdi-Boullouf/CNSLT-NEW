@@ -12,7 +12,7 @@ export default function Sites() {
   return (
     <div>
       <h2 className="text-2xl border-b-2 py-4 border-gray-200 my-4">
-        Les Sites Touristiques Les Plus Celebres De la Region
+        Choisissez parmi une large sélection d'hôtels adaptés à vos besoins
       </h2>
       {Areas.map((Area) => (
         <SiteSection key={Area._id} site={Area} />

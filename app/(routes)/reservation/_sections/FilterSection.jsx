@@ -43,7 +43,7 @@ export default function FilterSection() {
        onClick={handleViewMore}
        className="  bg-primary1 text-white font-medium py-2 px-4 rounded w-full"
      >
-       Voir plus..
+       Voir plus...
      </button>
       )}
     </div>

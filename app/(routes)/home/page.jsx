@@ -5,21 +5,25 @@ import Offers from "./_sections/Offers";
 import Activites from "./_sections/Activites";
 import Sites from "./_sections/Sites";
 import Reviews from "./_sections/Reviews";
-import { useState } from "react";
 import SeasonToggle from "@/components/ui/SeasonToggle";
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useStateContext } from "@/contexts/ContextProvider";
+import { useStateContext , usePathname } from "@/contexts/ContextProvider";
 import Link from "next/link";
 import LoadingPage from "@/components/LoadingPage";
 import { useGetAllArea } from "@/hooks/useFetchArea";
 import { useEffect } from "react";
+import CnslLive from '@/components/CnslLive'
+import React, { useState } from 'react';
+import { IoMdClose } from "react-icons/io";
+
+
 const menuItems = [
   // { name: "Nos Destinations", route: "/" },
-  { name: "Installation", route: "/installation" },
-  { name: "à propos CNSL", route: "/about" },
-  { name: "Les Articles", route: "/articles" },
-  { name: "événements Spéciales", route: "/evenement-speciale" },
+  { name: "INSTALLATIOS SPORTIVES", route: "/installation" },
+  { name: "ACTIVITES SPORTIVES ET DETENTES", route: "/about" },
+  { name: "REVUE DE PRESSE", route: "/articles" },
+  { name: "EVENEMENT SPECIAUX", route: "/evenement-speciale" },
 ];
 
 const menuVariants = {
@@ -54,6 +58,8 @@ const itemVariants = {
   exit: { x: -20, opacity: 0 },
 };
 
+
+
 export default function Home() {
   const { data: allAreas, error, isLoading, getAllArea } = useGetAllArea();
 
@@ -64,6 +70,21 @@ export default function Home() {
 
 
   const [summer, setSummer] = useState(false);
+  const [statusPage , setStatusPage] = useState(false);
+  const [statusButton , setStatusButton] = useState(false);
+  
+
+const changePage = ()=>{
+  setStatusButton(false)
+  setStatusPage(!statusPage);
+}
+
+const changecomponents =()=>{
+  setTimeout(()=>{
+    setStatusButton(!statusButton)
+  },1000)
+}
+
   const {
     openHeaderWithDestination,
     setopenHeaderWithDestination,
@@ -80,6 +101,7 @@ export default function Home() {
 
   return (
     <div>
+      <CnslLive/>
       <div
         className="w-full flex items-center justify-center bg-fixed bg-no-repeat bg-cover"
         style={{
@@ -127,9 +149,8 @@ export default function Home() {
             <SeasonToggle summer={summer} setSummer={setSummer} />
           </div>
           <div className="sm:px-0 w-1/3 sm:w-1/3 h-full flex justify-center  items-end pb-48 sm:pb-0 sm:justify-end sm:items-center    absolute  sm:h-40 right-0 sm:mt-48 ">
-            <Link
-              href="/reservation"
-              passHref
+            <div
+              onClick={changePage}
               className="sm:rounded-full  sm:fixed sm:z-[100] sm:-rotate-90 sm:h-28 sm:w-2  "
             >
               <motion.button
@@ -148,7 +169,7 @@ export default function Home() {
                   </motion.span>
                 </motion.div>
               </motion.button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -158,6 +179,43 @@ export default function Home() {
         <Sites />
       </div>
       <Reviews />
+      {statusPage == true ? (
+        <div className='fixed flex flex-col items-center justify-center top-0 left-0 h-screen w-screen backdrop-blur-sm bg-primary2 bg-opacity-90 z-50'>
+        
+            {
+              !statusButton ? (
+                <div className='w-[30%] h-[260px] sm:w-[80%] sm:h-[460px] bg-primary2 border-2 border-solid border-white rounded-lg flex sm:flex-col items-center justify-around'>
+                  <Link href='../hotel/reservation' className='w-[40%] h-[55%] bg-slate-700 border-solid rounded-lg border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
+                    <span className="text-orange-400 text-xl">Sportifs</span>
+                    <span className="text-white">Réservez maintenent et profitez des meilleur offres sportives</span>
+                  </Link>
+                  <div onClick={changecomponents} className='w-[40%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
+                    <span className="text-orange-400 text-xl">Autre</span>
+                    <span className="text-white">Choisisez la     catégorie qui vous convient</span>
+                  </div>
+                </div>
+
+              ):(
+                <div className='w-[30%] h-[260px] bg-primary2 border-2 border-solid border-white rounded-lg flex items-center justify-around  sm:w-[80%] sm:h-[460px] sm:flex-col'>
+                    <Link href='/' className='w-[40%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
+                    <span className="text-orange-400 text-xl">ORGANISME</span>
+                    <span className="text-white">Réservez maintenent et profitez des meilleurs offres sportives</span>
+                  </Link>
+                  <Link href={'../reservation'} className='w-[40%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
+                    <span className="text-orange-400 text-xl">Large public</span>
+                    <span className="text-white">Choisissez la catégorie qui vous convient</span>
+                  </Link>
+                </div>
+              )
+            }
+          
+          <div onClick={changePage} className="mt-10 text-3xl text-white"><IoMdClose /></div>
+        </div>
+      ) : ( 
+        <div></div>
+      )
+      }
     </div>
   );
 }
+

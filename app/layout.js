@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
         <ContextProvider >
           <ReservationProvider >
          <AuthProvider >
-         <CnslLive/>
+         {/* <CnslLive/> */}
          <Header />
         {children}
          <Footer />

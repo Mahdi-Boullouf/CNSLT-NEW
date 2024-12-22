@@ -115,14 +115,14 @@ export default function RoomsTable() {
     },
     {
       field: 'wholePrice',
-      headerName: 'in season',
+      headerName: 'prix',
       sortable: true,
       filter: true,
       valueFormatter: (params) => `${params.value} DA`
     },
     {
       field: 'decimalPrice',
-      headerName: 'or season',
+      headerName: 'promotions',
       sortable: true,
       filter: true,
       valueFormatter: (params) => `${params.value} DA`

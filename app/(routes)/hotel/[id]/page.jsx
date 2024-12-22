@@ -13,6 +13,7 @@ import { getUrlImage } from "@/lib/assistant";
 import Link from "next/link";
 import { useRouter , useParams } from "next/navigation";
 import LoadingPage from "@/components/LoadingPage";
+import CnslLive from '@/components/CnslLive'
 export default function page() {
   const {id} = useParams()
   // const [tikjdaId] = useState('66b69dee46674f256fd80cec');
@@ -40,6 +41,7 @@ export default function page() {
 
   return (
     <div>
+      <CnslLive/>
       <div
         className="font-raleway w-full flex items-center justify-center bg-fixed bg-no-repeat bg-cover"
         style={{

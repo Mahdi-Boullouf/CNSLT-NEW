@@ -9,7 +9,7 @@ import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { usePathname } from "next/navigation";
 import { useStateContext } from "@/contexts/ContextProvider";
 import placeholderImage from "@/public/placeholderImage.png"
- 
+import { MdLanguage } from "react-icons/md";
 import LoginButton from "./LoginButton";
 
 const headerVariants = {
@@ -43,19 +43,19 @@ const itemVariants = {
 };
 
 const navItems = [
-  { name: "Home", href: "/" },
+  { name: "ACCUEIL", href: "/" },
   { name: "Explore", href: "/explore" },
-  { name: "Installation", href: "/installation" },
-  { name: "En images", href: "/galerie" },
-  { name: "à propos Cnsl", href: "/about" },
+  { name: "Installation spotrives", href: "/installation" },
+  { name: "Activités sportives ", href: "/galerie" },
+  { name: "Organisme", href: "/" },
 ];
 
 const destinationItems = [
   // { name: "Tikjda", href: "/tikjda" },
   // { name: "Fouka", href: "/fouka" },
   // { name: "Seraidi", href: "/seraidi" },
-  { name: "entreprise et association", href: "/entreprise-association" },
-  { name: "événements Spéciales", href: "/evenement-speciale" },
+  { name: "Sportifs", href: "/entreprise-association" },
+  { name: "événement spéciaux", href: "/evenement-speciale" },
 ];
 
 const socialLinks = [
@@ -71,12 +71,19 @@ export default function Header() {
   const inlogin =  pathname.startsWith('/login');
   const insignup =  pathname.startsWith('/signup');
   const inForgotPassword = pathname.startsWith('/forgot-password'); 
-   const resetPassword = pathname.startsWith('/reset-password')
+  const resetPassword = pathname.startsWith('/reset-password')
   useEffect(() => {
     setopenHeader(false);
   }, [pathname]);
 
+  const [status , setStatus] = useState(false)
+
   const toggleMenu = () => {setopenHeader(!openHeader)
+    setStatus(false)
+    setopenHeaderWithDestination(false)
+  };
+  const toggleLanguage = () => {setopenHeader(!openHeader)
+    setStatus(true)
     setopenHeaderWithDestination(false)
   };
 if  (inDashboard || inlogin || insignup || inForgotPassword || resetPassword) {
@@ -99,11 +106,64 @@ else{
 
         <div className="w-1/3 flex flex-col justify-center items-center">
           {!openHeader && (
-            <Link href="/" className="w-full flex justify-center items-center h-full">
-              <Image src={logo} alt="logo" sizes={openHeader ? "200px" : "600px"} />
+            <Link href="/" className="w-full flex justify-between items-center h-full">
+              <div className="w-[40%] sm:w-full  flex justify-end pr-4">
+              <Image src={logo} alt="logo"  sizes={openHeader ? "200px" : "600px"} />
+              </div>
+              <span className="w-[60%] sm:w-0 sm:opacity-0 text-white text-start text-xl pl-1">Ministre des sports - algerie <br /> Centre National des Sportes <br /> et Loisirs de Tikjda</span>
             </Link>
           )}
-          {openHeader && (
+          {openHeader && status && (
+            <motion.div
+              className="absolute flex flex-col h-screen  justify-between p-4 bg-cover w-full sm:w-full "
+              variants={menuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <Link href="/" className="flex justify-center items-center w-[200px]  my-2 sm:my-12">
+                {/* <Image src={logo} alt="logo" sizes={openHeader ? "200px" : "600px"} /> */}
+
+              </Link>
+              {openHeaderWithDestination
+              ? 
+              <DealsList/>
+:
+                <div className=" flex flex-col items-center justify-center w-[30%] h-[35%]  sm:w-full  mx-auto p-4 border-gray-500 border-2  rounded-lg   ">
+                  <div className="h-1/2  flex items-center w-[85%] pt-10 pb-10">
+                    <p className='text-2xl text-white w-[60%] h-full flex flex-col justify-around items-end '>
+                    <span className='text-3xl'>
+                      وزارة الرياضة - الجزائر
+                      </span>
+                      <span>
+                      المركز الوطني للرياضة
+                      </span>
+                      
+                      <span>
+                      و التسلية بتيكجدة
+                      </span>
+                    </p>
+                    <div className='flex w-[40%] items-center justify-center'>
+                    <Image src={logo} alt="logo" sizes={openHeader ? "600px" : "600px"} className='ml-4' />
+                    </div>
+                  </div>
+                  <div className="text-end h-1/2 w-full flex items-center justify-center  ">
+                    <h2 className='text-white text-4xl text-end'>
+                      نعمل حاليا على تطوير <span className='text-orange-400'>المسخة العربية</span>
+                      <br />
+                      من الموقع , و نستعد بابلاغكم انها ستكون 
+                      <br />
+                      متاحة قريبا , شكرا لتفهمكم
+                    </h2>
+                  </div>
+                </div>
+            }
+              <div className="flex items-center justify-center mb-12">
+                <MenuButton isOpen={openHeader} toggleMenu={toggleMenu} />
+              </div>
+            </motion.div>
+          )}
+          {openHeader && !status && (
             <motion.div
               className="absolute flex flex-col h-screen  justify-between p-4 bg-cover w-full sm:w-full "
               variants={menuVariants}
@@ -138,13 +198,22 @@ else{
           )}
         </div>
         <div className="w-1/3 flex justify-end">
-          {!openHeader && <LoginButton />}
+          <div className="flex text-4xl sm:w-0 sm:opacity-0 text-white mr-5 h-12 items-center" onClick={toggleLanguage}>
+            {!openHeader && <>
+              عربي<MdLanguage className="ml-1" />
+            </>}
+          </div>
+          <div>
+            {!openHeader && <LoginButton />}
+          </div>
         </div>
       </div>
     </motion.div>
   );
 }
 }
+
+
 
 const NavItem = ({ href, name }) => (
   <motion.li

@@ -40,11 +40,11 @@ export default function SeasonToggle({ summer, setSummer }) {
   }));
   return (
     <div
-      className="  text-2xl font-body shadow-lg    w-64 h-12  bg-gray-500 bg-opacity-20 rounded-full p-2 flex justify-around items-center cursor-pointer"
+      className="  text-2xl font-body shadow-lg  sm:w-[400px]  w-[600px] h-16  bg-gray-500 bg-opacity-20 rounded-full p-2 flex justify-around items-center cursor-pointer"
       onClick={() => setSummer(!summer)}
     >
       <motion.div
-        className={`absolute z-20 w-28 h-10 ${
+        className={`absolute z-20 sm:w-[200px] w-[300px] h-14 ${
           summer ? "bg-primary1 text-white" : " bg-secondary2"
         } rounded-full`}
         initial={{ x: summer ? "-50%" : "50%" }}
@@ -82,16 +82,16 @@ export default function SeasonToggle({ summer, setSummer }) {
         </div>
       )}
       <motion.div
-        className="relative py-1 w-1/3 flex justify-center items-center  rounded-2xl z-30 "
+        className="relative py-1 w-1/2 flex justify-center items-center  rounded-2xl z-30 "
         animate={{ color: summer ? "white" : "white" }}
       >
-        Été
+        SPORTIF
       </motion.div>
       <motion.div
-        className="relative py-1 w-1/3 flex justify-center items-center rounded-2xl  z-30 "
+        className="relative py-1 w-1/2  text-center rounded-2xl sm:text-lg  z-30 "
         animate={{ color: summer ? "black" : "white" }}
       >
-        Hiver
+        <span> DESVERT ACTIVITES</span>
       </motion.div>
     </div>
   );

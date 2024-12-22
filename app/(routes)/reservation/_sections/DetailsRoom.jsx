@@ -28,7 +28,7 @@ export default function DetailsRoom({room}) {
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
 
   return (
-    <div className="">
+    <div className="mt-24">
       <div className="my-4">
         <div className="font-raleway text-7xl text-center text-primary2 my-6 sm:text-4xl font-medium">
           RESERVATION

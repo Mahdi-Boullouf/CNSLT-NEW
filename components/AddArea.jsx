@@ -1,319 +1,247 @@
-"use client";
-import React, { useState } from "react";
+"use client"
+import React, { useState, useCallback } from "react";
+import ImageUploader from "./ImageUploader";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { CardContent } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import Loading from "./ui/Loading";
-import { useUploadImage } from "@/hooks/useUpload";
-import ImageUploader from "./ImageUploader";
+import Loading from "@/components/ui/Loading";
 import { useCreateArea } from "@/hooks/useFetchArea";
+import { useUploadImage } from "@/hooks/useUpload";
+import ActivitiesCheckboxList from "./ActivitiesChechboxList";
 
-// Predefined activities (you might want to fetch these dynamically)
-const ACTIVITIES = [
-  { id: "hiking", name: "Hiking" },
-  { id: "swimming", name: "Swimming" },
-  { id: "camping", name: "Camping" },
-  { id: "skiing", name: "Skiing" },
-  { id: "climbing", name: "Rock Climbing" },
-  { id: "birdwatching", name: "Bird Watching" },
-  { id: "fishing", name: "Fishing" },
-];
-
-function AddArea() {
+export default function CreateArea() {
   const { createArea } = useCreateArea();
   const { uploadImage } = useUploadImage();
 
-  // State for form fields
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [activities, setActivities] = useState([]);
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    email: '',
+    password: '',
+  });
   
-  // State for images
-  const [mainPhoto, setMainPhoto] = useState([]);
-  const [summerCover, setSummerCover] = useState([]);
-  const [winterCover, setWinterCover] = useState([]);
-  const [gallery, setGallery] = useState([]);
-
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [cover, setCover] = useState([]);
+  const [coverSummer, setCoverSummer] = useState([]);
+  const [coverWinter, setCoverWinter] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activities, setActivities] = useState([]);
 
-  // Upload images
-  const uploadImages = async () => {
-    const imageUploaders = [
-      { files: mainPhoto, type: 'mainPhoto', required: true },
-      { files: summerCover, type: 'summerCover', required: false },
-      { files: winterCover, type: 'winterCover', required: false },
-      { files: gallery, type: 'gallery', required: false }
-    ];
+  const handleInputChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  }, []);
 
-    const uploadedImages = {};
+  const handleFilesSelected = useCallback((files) => {
+    setSelectedFiles(files);
+  }, []);
 
-    for (const imageUploader of imageUploaders) {
-      if (imageUploader.files.length > 0) {
-        try {
-          const uploadPromises = imageUploader.files.map(file => 
-            uploadImage(file).catch(error => {
-              toast.error(`Error uploading ${imageUploader.type} image: ${file.name}`);
-              return null;
-            })
-          );
-          
-          const uploadedImagesForType = await Promise.all(uploadPromises);
-          uploadedImages[imageUploader.type] = uploadedImagesForType.filter(Boolean);
-        } catch (error) {
-          if (imageUploader.required) {
-            toast.error(`Error uploading required ${imageUploader.type} images`);
+  const handleCoverSelected = useCallback((files) => {
+    setCover(files);
+  }, []);
+
+  const handleCoverSummerSelected = useCallback((files) => {
+    setCoverSummer(files);
+  }, []);
+
+  const handleCoverWinterSelected = useCallback((files) => {
+    setCoverWinter(files);
+  }, []);
+
+  const uploadImages = useCallback(async (files) => {
+    if (!files || files.length === 0) return null;
+    try {
+      const uploadedImages = await Promise.all(
+        files.map(async (file) => {
+          try {
+            const result = await uploadImage(file);
+            return result;
+          } catch (error) {
+            console.error('Error uploading file:', error);
             return null;
           }
-        }
-      }
+        })
+      );
+      return uploadedImages.filter(Boolean);
+    } catch (error) {
+      console.error('Error in uploadImages:', error);
+      return null;
+    }
+  }, [uploadImage]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.name.trim() || !formData.description.trim() || !formData.email.trim() || !formData.password.trim()) {
+      toast.error("All fields are required");
+      return;
     }
 
-    return uploadedImages;
-  };
-
-  // Validate inputs
-  const validateInputs = () => {
-    const validations = [
-      { condition: !name.trim(), message: "Area name is required" },
-      { condition: !description.trim(), message: "Area description is required" },
-      { condition: !email.trim(), message: "Email is required" },
-      { condition: !password.trim(), message: "Password is required" },
-      { condition: activities.length === 0, message: "At least one activity must be selected" },
-      { condition: mainPhoto.length === 0, message: "Main photo is required" }
-    ];
-
-    for (const validation of validations) {
-      if (validation.condition) {
-        toast.error(validation.message);
-        return false;
-      }
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
     }
 
-    return true;
-  };
+    // Validate password length
+    if (formData.password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return;
+    }
 
-  // Handle activity toggle
-  const toggleActivity = (activityId) => {
-    setActivities(prev => 
-      prev.includes(activityId)
-        ? prev.filter(id => id !== activityId)
-        : [...prev, activityId]
-    );
-  };
-
-  // Handle form submission
-  const handleSubmit = async () => {
-    // Validate inputs first
-    if (!validateInputs()) return;
-  
     setIsSubmitting(true);
     try {
-      // Upload images first
-      const uploadedImages = await uploadImages();
-      
-      // Check if image upload was successful (especially for required main photo)
-      if (!uploadedImages || !uploadedImages.mainPhoto) {
-        toast.error("Main photo upload failed");
-        setIsSubmitting(false);
-        return;
-      }
-  
-      // Prepare area data with optional fields
+      // Upload images
+      const mainPhoto = await uploadImages(cover);
+      const summerPhoto = await uploadImages(coverSummer);
+      const winterPhoto = await uploadImages(coverWinter);
+      const galleryPhotos = await uploadImages(selectedFiles);
+
       const areaData = {
-        name,
-        description,
-        // Only include optional images if they exist
-        ...(uploadedImages.mainPhoto?.[0] && { photo: uploadedImages.mainPhoto[0] }),
-        ...(uploadedImages.winterCover?.[0] && { coverWinter: uploadedImages.winterCover[0] }),
-        ...(uploadedImages.summerCover?.[0] && { coverSummer: uploadedImages.summerCover[0] }),
-        email,
-        password,
-        activities,
-        // Only include gallery if there are images
-        ...(uploadedImages.gallery?.length > 0 && { gallery: uploadedImages.gallery })
+        name: formData.name,
+        description: formData.description,
+        email: formData.email,
+        password: formData.password,
+        photo: mainPhoto?.[0] || '',
+        photoSummer: summerPhoto?.[0] || '',
+        photoWinter: winterPhoto?.[0] || '',
+        gallery: galleryPhotos || [],
+        activities: activities
       };
-  
-      // Create area
-      // console.log("Sending area data:", areaData);
-      
+
+      console.log('Submitting area data:', areaData);
+
       const response = await createArea(areaData);
-  
+
       if (response) {
         toast.success("Area created successfully!");
-        
         // Reset form
-        setName("");
-        setDescription("");
-        setEmail("");
-        setPassword("");
+        setFormData({ name: '', description: '', email: '', password: '' });
+        setCover([]);
+        setCoverSummer([]);
+        setCoverWinter([]);
+        setSelectedFiles([]);
         setActivities([]);
-        setMainPhoto([]);
-        setSummerCover([]);
-        setWinterCover([]);
-        setGallery([]);
       }
     } catch (error) {
+      console.error('Error creating area:', error);
+      toast.error(error.response?.data?.message || "Error creating area. Please try again.");
+    } finally {
       setIsSubmitting(false);
-    
-      // Log the error for debugging
-      console.error("Error in Area Creation:", error);
-    
-      if (error.response) {
-        // HTTP response errors
-        const { data, status } = error.response;
-        console.error("Server Response Error:", status, data);
-    
-        if (data && data.errors && Array.isArray(data.errors)) {
-          // Multiple validation errors
-          data.errors.forEach((errMsg) => {
-            toast.error(errMsg);
-          });
-        } else {
-          // Generic server error
-          toast.error(data?.message || "An error occurred while creating the area.");
-        }
-      } else if (error.request) {
-        // No response from server
-        console.error("No Response from Server:", error.request);
-        toast.error("No response received from the server. Please try again later.");
-      } else {
-        // Other errors (e.g., request setup issues)
-        console.error("Request Setup Error:", error.message);
-        toast.error(error.message || "An unknown error occurred. Please try again.");
-      }
-    }}
-    
+    }
+  };
 
   return (
-    <div className="mx-auto space-y-4">
-      {/* Main Photo */}
-      <div className="space-y-2">
-        <Label className="font-semibold text-lg">Area Main Photo</Label>
-        <ImageUploader 
-          onFilesSelected={setMainPhoto}
-          selectedFiles={mainPhoto}
-          maxImages={1}
+    <CardContent className="p-6 bg-gradient-to-br from-gray-50 to-white rounded-xl shadow-lg">
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="space-y-6">
+          <div>
+            <Label className="text-xl font-bold text-gray-800 mb-3 block">Area Cover (Required)</Label>
+            <ImageUploader
+              onFilesSelected={handleCoverSelected}
+              selectedFiles={cover}
+              maxImages={1}
+            />
+          </div>
+          <div>
+            <Label className="text-xl font-bold text-gray-800 mb-3 block">Summer Cover (Optional)</Label>
+            <ImageUploader
+              onFilesSelected={handleCoverSummerSelected}
+              selectedFiles={coverSummer}
+              maxImages={1}
+            />
+          </div>
+          <div>
+            <Label className="text-xl font-bold text-gray-800 mb-3 block">Winter Cover (Optional)</Label>
+            <ImageUploader
+              onFilesSelected={handleCoverWinterSelected}
+              selectedFiles={coverWinter}
+              maxImages={1}
+            />
+          </div>
+          <div>
+            <Label className="text-xl font-bold text-gray-800 mb-3 block">Area Gallery (Optional)</Label>
+            <ImageUploader
+              onFilesSelected={handleFilesSelected}
+              selectedFiles={selectedFiles}
+            />
+          </div>
+        </div>
+        
+        <div className="space-y-6">
+          <div>
+            <Label htmlFor="name" className="text-lg font-semibold text-gray-700 mb-2 block">Area Name *</Label>
+            <Input
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 transition duration-200"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+              placeholder="Enter area name"
+            />
+          </div>
+          <div>
+            <Label htmlFor="description" className="text-lg font-semibold text-gray-700 mb-2 block">Area Description *</Label>
+            <Textarea
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 transition duration-200"
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              required
+              rows={6}
+              placeholder="Describe the area..."
+            />
+          </div>
+          <div>
+            <Label htmlFor="email" className="text-lg font-semibold text-gray-700 mb-2 block">Admin Email *</Label>
+            <Input
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 transition duration-200"
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+              placeholder="Enter admin email"
+            />
+          </div>
+          <div>
+            <Label htmlFor="password" className="text-lg font-semibold text-gray-700 mb-2 block">Admin Password * (min 6 characters)</Label>
+            <Input
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 transition duration-200"
+              id="password"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+              minLength={6}
+              placeholder="Enter admin password"
+            />
+          </div>
+        </div>
+
+        <ActivitiesCheckboxList
+          activities={activities}
+          setActivities={setActivities}
+          className="w-full p-2 my-4"
         />
-      </div>
-
-      {/* Area Details */}
-      <div className="grid grid-cols-2 sm:grid-cols-1 gap-4">
-        {/* Name */}
-        <div className="space-y-2">
-          <Label htmlFor="name">Area Name</Label>
-          <Input
-            className="rounded-3xl"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-
-        {/* Description */}
-        <div className="space-y-2">
-          <Label htmlFor="description">Area Description</Label>
-          <Input
-            className="rounded-3xl"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </div>
-
-        {/* Email */}
-        <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            className="rounded-3xl"
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-
-        {/* Password */}
-        <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            className="rounded-3xl"
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-      </div>
-
-      {/* Activities Selection */}
-      <div className="space-y-2">
-        <Label>Select Activities</Label>
-        <div className="grid grid-cols-3 gap-4">
-          {ACTIVITIES.map((activity) => (
-            <div key={activity.id} className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                id={activity.id}
-                checked={activities.includes(activity.id)}
-                onChange={() => toggleActivity(activity.id)}
-                className="rounded"
-              />
-              <Label htmlFor={activity.id}>{activity.name}</Label>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Optional Covers */}
-      <div className="grid grid-cols-2 gap-4">
-        {/* Summer Cover */}
-        <div className="space-y-2">
-          <Label className="font-semibold text-lg">Summer Cover Photo (Optional)</Label>
-          <ImageUploader 
-            onFilesSelected={setSummerCover}
-            selectedFiles={summerCover}
-            maxImages={1}
-          />
-        </div>
-
-        {/* Winter Cover */}
-        <div className="space-y-2">
-          <Label className="font-semibold text-lg">Winter Cover Photo (Optional)</Label>
-          <ImageUploader 
-            onFilesSelected={setWinterCover}
-            selectedFiles={winterCover}
-            maxImages={1}
-          />
-        </div>
-      </div>
-
-      {/* Gallery */}
-      <div className="space-y-2">
-        <Label className="font-semibold text-lg">Gallery Images (Optional)</Label>
-        <ImageUploader 
-          onFilesSelected={setGallery}
-          selectedFiles={gallery}
-          maxImages={5}
-        />
-      </div>
-
-      {/* Submit Button */}
-      <Button
-        onClick={handleSubmit}
-        className="w-full bg-primary1 hover:bg-primary1 hover:opacity-70"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? <Loading /> : "Create Area"}
-      </Button>
-    </div>
+        
+        <Button 
+          type="submit" 
+          className="w-full py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold rounded-lg shadow-md hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? <Loading className="mx-auto" /> : "Create Area"}
+        </Button>
+      </form>
+    </CardContent>
   );
 }
-
-export default AddArea;

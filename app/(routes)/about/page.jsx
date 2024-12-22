@@ -5,9 +5,9 @@ import Image from 'next/image'
 import { useStateContext } from "@/contexts/ContextProvider";
 import { useGetAllArea } from "@/hooks/useFetchArea";
 import { getUrlImage } from "@/lib/assistant";
+import CnslLive from '@/components/CnslLive'
 
 export default function about() {
-           
     const {Areas}=useStateContext()
     const { data: allAreas, error, isLoading, getAllArea } = useGetAllArea();
 
@@ -16,6 +16,7 @@ export default function about() {
     }, []);
   return (
     <div className='   pt-36 bg-white'>
+      <Header />
         <div className='flex items-center justify-center my-16'>
             <div className=' text-blue-500 font-semibold uppercase px-4 py-2 text-7xl sm:text-4xl font-body'>
             CNSL
@@ -31,15 +32,15 @@ export default function about() {
            </p>
            </div>
 
-         <div className="flex items-center sm:flex-col space-x-8">
+         <div className="flex sm:h-auto items-center sm:flex-col space-x-8">
 
-         <div className="w-1/2 h-full sm:w-full sm:my-6 py-12">
+         <div className="w-1/2 h-[80%] sm:w-full sm:my-6 py-12 object-cover">
            <img src={getUrlImage(Area?.photo)} 
 
            className="h-[737px] sm:h-full rounded-3xl" 
            alt="Description" />
          </div>
-         <div className="flex w-1/2 text-primary2 font-body sm:w-full h-[737px]  flex-col items-start justify-start">
+         <div className="flex w-1/2 text-primary2 font-body sm:w-full sm:h-auto h-[737px]  flex-col items-start justify-start">
            <p className="text-[32px] sm:text-xl">
            
             

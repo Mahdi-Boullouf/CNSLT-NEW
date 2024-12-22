@@ -14,7 +14,7 @@ export default function CnslLive() {
 
   return (
     <div
-      className="w-full h-0 overflow-hidden relative"
+      className="w-full h-20 overflow-hidden absolute top-36 z-10"
       style={{ 
         backgroundColor: exclusive.color,
         color: exclusive.colorText 
@@ -33,7 +33,7 @@ export default function CnslLive() {
         key={exclusive.title} // Helps React/Framer reset animation if title changes
       >
         <p className='h-16 flex items-center  text-center w-full'>
-          {exclusive.title}
+        <span className='mr-24'>CNSLT Live</span> {exclusive.title} <span className='ml-24'>CNSLT News</span>
         </p>
       </motion.div>
     </div>

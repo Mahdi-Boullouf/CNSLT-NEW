@@ -6,6 +6,7 @@ import TypingAnimation from '@/components/TypingAnimation'
 import { useGetAllArticles } from '@/hooks/useFetchArticles'
 import { getUrlImage } from '@/lib/assistant'
 import { useRouter } from 'next/navigation'
+import CnslLive from '@/components/CnslLive'
 
 export default function Page() {
   const router = useRouter()
@@ -52,6 +53,7 @@ export default function Page() {
 
   return (
     <div className="w-full">
+      <CnslLive/> 
       <div className="static sm:p-0">
         <div className="sm:h-[60vh]">
           <Image src={reservationBg} className="h-screen w-full sm:h-[60vh]" alt="Reservation Background" />

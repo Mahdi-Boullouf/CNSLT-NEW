@@ -230,10 +230,10 @@ function AddRoom() {
               <div className="flex space-x-2 justify-around">
                 {/* Whole Number Input */}
                 <div>
-                <Label>Price Per Person (in season)</Label>
+                <Label>prix</Label>
                 <Input
                   className="rounded-3xl mt-2 w-full"
-                  placeholder="Whole number"
+                  placeholder="00DA"
                   name="priceWholeNumber"
                   type="number"
                   value={priceWholeNumber}
@@ -246,10 +246,10 @@ function AddRoom() {
                   </div>
                   <div>
                 {/* Decimal Part Input */}
-                  <Label>Price Per Person (on season)</Label>
+                  <Label>promotion</Label>
                 <Input
                   className="rounded-3xl mt-2 w-full"
-                  placeholder="Decimal part"
+                  placeholder="0%"
                   name="priceDecimal"
                   type="text" // Keep as text to retain all digits
                   value={priceDecimal}

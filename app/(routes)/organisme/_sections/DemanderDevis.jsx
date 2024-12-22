@@ -164,7 +164,7 @@ export default function DemanderDevis() {
           <div className="grid w-full items-center gap-4">
             {renderInputField(
               "fullName",
-              "Féderation du clubs ou de l'association sportive",
+              "Nom de l'entreprise",
               "text",
               "Enter your full name"
             )}

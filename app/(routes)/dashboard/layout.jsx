@@ -7,7 +7,7 @@ export default function Layout({ children }) {
   const { currentColor, activeMenu, setActiveMenu, screenSize } =
   useStateContext();
   return (
-    <div className="flex ">
+    <div className="flex z-40">
      {activeMenu && (
         <div className=" bg-gray-200 pt-20 sm:pt-20 w-64 sm:w-0  sm:bg-white ">
           <SidbarDashboard />

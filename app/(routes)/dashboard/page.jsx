@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function Dashboard() {
   return (
     <div 
-      className="w-full bg-[url('/dashboard-01.svg')] bg-cover  h-screen m-0 p-0"
+      className="w-full bg-[url('/dashboard-01.svg')] bg-cover  h-screen m-0 p-0 z-40"
     >
       {/* <img src="/dashboard-01.svg" alt="photo" srcset="" /> */}
       <div className='w-[100%] h-[30%] flex justify-center items-center'>

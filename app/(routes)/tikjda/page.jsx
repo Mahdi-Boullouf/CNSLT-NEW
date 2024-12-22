@@ -7,6 +7,7 @@ import RoomGrid from "@/components/RoomGrid";
 import homeImg from "@/public/cnsl-images/Tikjda page/1.jpg"; 
 import  thumb from '@/public/cnsl-images/home page/Été/IMG_0994~1.jpg' 
 
+import CnslLive from '@/components/CnslLive'
 import { useGetAllArea } from "@/hooks/useFetchArea";
 import FromGallery from "@/components/FromGallery";
 import { getUrlImage } from "@/lib/assistant";
@@ -36,6 +37,7 @@ export default function Tikjda() {
 
   return (
     <div>
+      <CnslLive/>
       <div
         className="font-raleway w-full flex items-center justify-center bg-fixed bg-no-repeat bg-cover"
         style={{

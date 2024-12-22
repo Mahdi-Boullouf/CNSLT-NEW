@@ -47,7 +47,7 @@ export default function RoomCard({ activity }) {
         </div>
         <div className="flex justify-between items-end">
           <div className="text-lg font-bold text-primary1">
-            {activity.pricePerPerson} DA
+          Voir plus..
             <span className="text-xs text-gray-500 block">per person</span>
           </div>
           {/* <button className="bg-primary1  text-white px-4 py-2 rounded-md hover:bg-primary1/80 transition duration-300">

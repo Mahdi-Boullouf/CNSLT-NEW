@@ -174,10 +174,10 @@ export default function EditRoom({ room }) {
               <div className="flex space-x-2 justify-around">
                 {/* Whole Number Input */}
                 <div>
-                  <Label>Price Per Person (in season)</Label>
+                  <Label>prix</Label>
                   <Input
                     className="rounded-3xl mt-2 w-full"
-                    placeholder="Price Per Person"
+                    placeholder="00DA"
                     name="priceWholeNumber"
                     type="number"
                     value={priceWholeNumber}
@@ -190,10 +190,10 @@ export default function EditRoom({ room }) {
                 </div>
                 <div>
                   {/* Decimal Part Input */}
-                  <Label>Price Per Person (or season)</Label>
+                  <Label>promotion</Label>
                   <Input
                     className="rounded-3xl mt-2 w-full"
-                    placeholder="Price Per Person"
+                    placeholder="0%"
                     name="priceDecimal"
                     type="text"
                     value={priceDecimal}
