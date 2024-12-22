@@ -16,7 +16,7 @@ export default function about() {
     }, []);
   return (
     <div className='   pt-36 bg-white'>
-      <Header />
+      <CnslLive />
         <div className='flex items-center justify-center my-16'>
             <div className=' text-blue-500 font-semibold uppercase px-4 py-2 text-7xl sm:text-4xl font-body'>
             CNSL
