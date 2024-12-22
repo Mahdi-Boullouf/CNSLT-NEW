@@ -25,7 +25,7 @@ export default function about() {
         </div>
         <div className=" container grid grid-cols-1  gap-4">
   {allAreas?.map((Area) => (
-    <div  key={Area._id} className=" my-4"  >
+    <div  key={Area._id} className=" my-4" >
       <div >
               <p className=' max-w-fit text-white  bg-primary1 rounded-full font-bold uppercase px-4 py-2 text-3xl sm:text-xl'>
               ABOUT CNSL - {Area?.name}
