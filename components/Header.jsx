@@ -47,7 +47,7 @@ const navItems = [
   { name: "Explore", href: "/explore" },
   { name: "Installation spotrives", href: "/installation" },
   { name: "Activités sportives ", href: "/galerie" },
-  { name: "Organisme", href: "/" },
+  { name: "Organisme", href: "/organism" },
 ];
 
 const destinationItems = [
