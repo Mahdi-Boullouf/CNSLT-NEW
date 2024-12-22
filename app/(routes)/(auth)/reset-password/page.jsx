@@ -115,7 +115,10 @@ export default function page() {
 //     </div>
 //   </div>
 //   )
+<<<<<<< HEAD
 }
+=======
+ }
+>>>>>>> a6c3a2b29e6a443a24f6f575a0e91bd9de25a4e9
 // // export default function page(){
-// //   <div></div>
-// // }
+// //   <div></div> }
