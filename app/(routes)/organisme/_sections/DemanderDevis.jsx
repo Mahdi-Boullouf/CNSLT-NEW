@@ -107,52 +107,8 @@ export default function DemanderDevis() {
     </div>
   );
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = "Email is invalid";
-    if (!formData.phone.trim()) newErrors.phone = "Phone is required";
-    if (!formData.areaId) newErrors.areaId = "Area is required";
-    if (!formData.serviceType)
-      newErrors.serviceType = "Service type is required";
-    if (!formData.participantsNumber)
-      newErrors.participantsNumber = "Number of participants is required";
-    if (!formData.description.trim())
-      newErrors.description = "Description is required";
-    // if (!formData.needsConvention) newErrors.needsConvention = "Please specify if you have a convention";
-    // if (formData.needsConvention === "no") {
-    //   if (!file) newErrors.file = toast.error("Please upload a file");
-    //   if (!captchaValue) newErrors.captcha = toast.error("Please complete the CAPTCHA");
-    // }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      try {
-        const res = await createDevis(formData);
-        toast.success(res.message);
-        setFormData({
-          fullName: "",
-          email: "",
-          phone: "",
-          areaId: "",
-          serviceType: "",
-          description: "",
-          participantsNumber: "",
-          needsConvention: "",
-          patnership: false,
-        });
-        setIsOpen(false);
-      } catch (error) {
-        toast.error(error.message || "Failed to create devis");
-      }
-    }
   };
 
   return (

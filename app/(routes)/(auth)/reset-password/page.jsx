@@ -17,7 +17,7 @@
 
  
 
-// export default function page() {
+export default function page() {
 //   const router = useRouter()
 //   const [isLoading, setIsLoading] = useState(false)
 //   const searchParams = useSearchParams();
@@ -115,7 +115,7 @@
 //     </div>
 //   </div>
 //   )
-// }
+}
 // // export default function page(){
 // //   <div></div>
 // // }

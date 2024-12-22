@@ -197,7 +197,7 @@ const changecomponents =()=>{
 
               ):(
                 <div className='w-[30%] h-[260px] bg-primary2 border-2 border-solid border-white rounded-lg flex items-center justify-around  sm:w-[80%] sm:h-[460px] sm:flex-col'>
-                    <Link href='/' className='w-[40%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
+                    <Link href='/organisme' className='w-[40%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
                     <span className="text-orange-400 text-xl">ORGANISME</span>
                     <span className="text-white">Réservez maintenent et profitez des meilleurs offres sportives</span>
                   </Link>
