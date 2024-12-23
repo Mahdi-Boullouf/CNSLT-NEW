@@ -110,7 +110,7 @@ else{
               <div className="w-[40%] sm:w-full  flex justify-end pr-4">
               <Image src={logo} alt="logo"  sizes={openHeader ? "200px" : "600px"} />
               </div>
-              <span className="w-[60%] sm:w-0 sm:opacity-0 text-white text-start text-xl pl-1">Ministre des sports - algerie <br /> Centre National des Sportes <br /> et Loisirs de Tikjda</span>
+              <span className="w-[60%] sm:w-0 sm:opacity-0 text-white text-start text-xl pl-1">Ministére des sports - algérie <br /> Centre National des Sports <br /> et Loisirs de Tikjda</span>
             </Link>
           )}
           {openHeader && status && (
@@ -129,9 +129,9 @@ else{
               ? 
               <DealsList/>
 :
-                <div className=" flex flex-col items-center justify-center w-[30%] h-[35%]  sm:w-full  mx-auto p-4 border-gray-500 border-2  rounded-lg   ">
+                <div className=" flex flex-col items-center justify-center w-[40%] h-[45%]  sm:w-full  mx-auto p-4 border-gray-500 border-2  rounded-lg   ">
                   <div className="h-1/2  flex items-center w-[85%] pt-10 pb-10">
-                    <p className='text-2xl text-white w-[60%] h-full flex flex-col justify-around items-end '>
+                    <p className='text-3xl text-white w-[60%] h-full flex flex-col justify-around items-end '>
                     <span className='text-3xl'>
                       وزارة الرياضة - الجزائر
                       </span>
@@ -149,9 +149,9 @@ else{
                   </div>
                   <div className="text-end h-1/2 w-full flex items-center justify-center  ">
                     <h2 className='text-white text-4xl text-end'>
-                      نعمل حاليا على تطوير <span className='text-orange-400'>المسخة العربية</span>
+                      نعمل حاليا على تطوير <span className='text-orange-400'>النسخة العربية</span>
                       <br />
-                      من الموقع , و نستعد بابلاغكم انها ستكون 
+                      من الموقع , و نستعد بإبلاغكم انها ستكون 
                       <br />
                       متاحة قريبا , شكرا لتفهمكم
                     </h2>
@@ -198,9 +198,9 @@ else{
           )}
         </div>
         <div className="w-1/3 flex justify-end">
-          <div className="flex text-4xl sm:w-0 sm:opacity-0 text-white mr-5 h-12 items-center" onClick={toggleLanguage}>
+          <div className="flex text-3xl sm:w-0 sm:opacity-0 text-white mr-5 h-12 items-center" onClick={toggleLanguage}>
             {!openHeader && <>
-              عربي<MdLanguage className="ml-1" />
+              عربي<MdLanguage className="ml-1 text-3xl" />
             </>}
           </div>
           <div>

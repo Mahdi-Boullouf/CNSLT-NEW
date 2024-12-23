@@ -40,7 +40,7 @@ export default function SeasonToggle({ summer, setSummer }) {
   }));
   return (
     <div
-      className="  text-2xl font-body shadow-lg  sm:w-[400px]  w-[600px] h-16  bg-gray-500 bg-opacity-20 rounded-full p-2 flex justify-around items-center cursor-pointer"
+      className="  text-2xl font-body shadow-lg  sm:w-[400px]  w-[600px] h-16  bg-gray-700 bg-opacity-20 rounded-full p-2 flex justify-around items-center cursor-pointer"
       onClick={() => setSummer(!summer)}
     >
       <motion.div
@@ -89,9 +89,9 @@ export default function SeasonToggle({ summer, setSummer }) {
       </motion.div>
       <motion.div
         className="relative py-1 w-1/2  text-center rounded-2xl sm:text-lg  z-30 "
-        animate={{ color: summer ? "black" : "white" }}
+        animate={{ color: summer ? "white" : "white" }}
       >
-        <span> DESVERT ACTIVITES</span>
+        <span> DESVERTS ACTIVITÉS</span>
       </motion.div>
     </div>
   );

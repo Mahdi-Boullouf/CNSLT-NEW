@@ -58,9 +58,7 @@ export default function page() {
               <div className="uppercase mb-8 text-4xl">
                 cnslt Tikjda bouira
               </div>
-              <Link href='reservation' className="bg-primary1 rounded-lg py-2 px-4 text-center w-2/3 ">
-                RESERVE NOW
-              </Link>
+
             </div>
           </div>
           <div className="w-1/3 h-full flex justify-center items-end pb-16 sm:w-full">

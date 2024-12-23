@@ -8,7 +8,8 @@ import { useGetAllArea } from "@/hooks/useFetchArea";
 const tikejdaAreas = [
   'Chalet de Thighzart',
   'Hôtel Djurdjura',
-  'Hôtel Tikjda'  // Added this area
+  'Hôtel Tikjda',
+  'Hotel Pinot Noir'  // Added this area
 ].map(name => name.toLowerCase());
 
 export default function Galerie() {
@@ -70,7 +71,7 @@ export default function Galerie() {
             }}
           />
           {/* Area options div */}
-          {areaOptions.map((area) => area != 'Chalet de Thighzart' && area != 'Hôtel Djurdjura' && area != 'Hôtel Tikjda' ? (
+          {areaOptions.map((area) => area != 'Chalet de Thighzart' && area != 'Hôtel Djurdjura' && area != 'Hôtel Tikjda' && area != 'Hotel Pinot Noir' ? (
             <div
               key={area}
               className={`flex-1 px-4 font-bold text-primary2 font-body uppercase text-lg sm:text-sm flex items-center justify-center cursor-pointer relative z-10 text-center transition-colors duration-300 ${

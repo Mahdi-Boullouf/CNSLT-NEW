@@ -166,38 +166,33 @@ export default function DemanderDevis() {
               "fullName",
               "Féderation du clubs ou de l'association sportive",
               "text",
-              "Enter your full name"
+              "Veuillez remplir ici"
             )}
             {renderInputField(
               "email",
               "Email",
               "email",
-              "Enter your email address"
+              "Veuillez remplir ici"
             )}
             {renderInputField(
               "phone",
               "numéro de telephone",
               "tel",
-              "Enter your phone number"
+              "Veuillez remplir ici"
             )}
             {renderSelectField(
               "areaId",
-              "selectionnez l'hotel",
+              "l'hotel",
               Areas.map((area) => ({
                 value: area.name,
                 label: area.name,
               }))
             )}
-            {renderSelectField("serviceType", "type de service", [
-              { value: "enterprise", label: "Enterprise" },
-              { value: "association", label: "Association" },
-            ])}
-
             {renderInputField(
               "participantsNumber",
               "Numéro de Participants",
               "number",
-              "Enter number of participants"
+              "Veuillez remplir ici"
             )}
             <div className="flex flex-col space-y-1.5">
               <Label
@@ -208,7 +203,7 @@ export default function DemanderDevis() {
               </Label>
               <Textarea
                 id="description"
-                placeholder="Enter description"
+                placeholder="Veuillez remplir ici"
                 value={formData.description}
                 onChange={handleChange}
                 className={`ring-0 [&>span]:line-clamp-0 ${
@@ -219,7 +214,7 @@ export default function DemanderDevis() {
                 <p className="text-red-500 text-sm">{errors.description}</p>
               )}
             </div>
-            {renderSelectField("needsConvention", "Do you have Convention?", [
+            {renderSelectField("needsConvention", "Avez-vous une convention ?", [
               { value: "yes", label: "Yes" },
               { value: "no", label: "No" },
             ])}
@@ -244,7 +239,7 @@ export default function DemanderDevis() {
               className="text-white px-6 py-2 rounded-lg bg-primary1 font-semibold text-lg hover:bg-opacity-60"
               disabled={isLoading}
             >
-              {isLoading ? "Submitting..." : "Submit"}
+              {isLoading ? "Submitting..." : "Envoyer"}
             </Button>
           </div>
         </form>

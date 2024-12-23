@@ -1,6 +1,6 @@
 "use client";
-import homeImg from "@/public/cnsl-images/home page/Hiver/1.JPG";
-import  thumb from '@/public/cnsl-images/home page/Été/IMG_0994~1.jpg' 
+import homeImg from "@/public/home2.png";
+import  thumb from '@/public/home1.png' 
 import Offers from "./_sections/Offers";
 import Activites from "./_sections/Activites";
 import Sites from "./_sections/Sites";
@@ -21,9 +21,9 @@ import { IoMdClose } from "react-icons/io";
 const menuItems = [
   // { name: "Nos Destinations", route: "/" },
   { name: "INSTALLATIOS SPORTIVES", route: "/installation" },
-  { name: "ACTIVITES SPORTIVES ET DETENTES", route: "/about" },
+  { name: "ACTIVITES SPORTIVES ET DETENTES", route: "/galerie" },
   { name: "REVUE DE PRESSE", route: "/articles" },
-  { name: "EVENEMENT SPECIAUX", route: "/evenement-speciale" },
+  { name: "ÉVÉNEMENTS SPÉCIAUX", route: "/evenement-speciale" },
 ];
 
 const menuVariants = {
@@ -103,7 +103,7 @@ const changecomponents =()=>{
     <div>
       <CnslLive/>
       <div
-        className="w-full flex items-center justify-center bg-fixed bg-no-repeat bg-cover"
+        className="w-full flex items-center justify-center bg-fixed bg-no-repeat bg-cover h-[100vh]"
         style={{
           backgroundImage: `url(${summer ? thumb.src : homeImg.src})`,
           height: "100vh",
@@ -129,8 +129,8 @@ const changecomponents =()=>{
                       key={index}
                       variants={itemVariants}
                       whileHover={{ scale: 1.0, x: 10 }}
-                      className={`hover:text-white hover:font-semibold transition-all duration-300 cursor-pointer font-medium ${
-                        summer ? "text-gray-700" : "text-gray-300"
+                      className={`hover:text-white hover:font-semibold transition-all duration-300 cursor-pointer font-medium text-bold ${
+                        summer ? "text-gray-200" : "text-gray-300"
                       }`}
                     >
                       <Link
@@ -185,12 +185,12 @@ const changecomponents =()=>{
             {
               !statusButton ? (
                 <div className='w-[30%] h-[260px] sm:w-[80%] sm:h-[460px] bg-primary2 border-2 border-solid border-white rounded-lg flex sm:flex-col items-center justify-around'>
-                  <Link href='../hotel/reservation' className='w-[40%] h-[55%] bg-slate-700 border-solid rounded-lg border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
-                    <span className="text-orange-400 text-xl">Sportifs</span>
+                  <Link href='../entreprise-association' className='w-[40%] h-[55%] bg-slate-700 border-solid rounded-lg border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
+                    <span className="text-orange-400 text-lg">Sportifs</span>
                     <span className="text-white">Réservez maintenent et profitez des meilleur offres sportives</span>
                   </Link>
                   <div onClick={changecomponents} className='w-[40%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
-                    <span className="text-orange-400 text-xl">Autre</span>
+                    <span className="text-orange-400 text-lg">Autre</span>
                     <span className="text-white">Choisisez la     catégorie qui vous convient</span>
                   </div>
                 </div>
@@ -198,11 +198,11 @@ const changecomponents =()=>{
               ):(
                 <div className='w-[30%] h-[260px] bg-primary2 border-2 border-solid border-white rounded-lg flex items-center justify-around  sm:w-[80%] sm:h-[460px] sm:flex-col'>
                     <Link href='/organisme' className='w-[40%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
-                    <span className="text-orange-400 text-xl">ORGANISME</span>
+                    <span className="text-orange-400 text-lg">ORGANISME</span>
                     <span className="text-white">Réservez maintenent et profitez des meilleurs offres sportives</span>
                   </Link>
                   <Link href={'../reservation'} className='w-[40%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
-                    <span className="text-orange-400 text-xl">Large public</span>
+                    <span className="text-orange-400 text-lg">Large public</span>
                     <span className="text-white">Choisissez la catégorie qui vous convient</span>
                   </Link>
                 </div>

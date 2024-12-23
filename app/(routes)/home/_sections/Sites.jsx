@@ -19,7 +19,7 @@ export default function Sites() {
       ))}
       <div className="flex flex-col justify-center items-center mt-16">
         <div className=" text-blue-800 text-6xl  font-body sm:text-3xl sm:text-center mb-6 ">
-          Vous êtes une organisation ou une association.
+          Vous êtes une organisme ?
         </div>
         <div className="my-10 flex items-center justify-between bg-white p-4 rounded-lg  shadow-3xl sm:flex-col sm:px-2  sm:py-2  ">
           <div className="flex items-center sm:flex-col">

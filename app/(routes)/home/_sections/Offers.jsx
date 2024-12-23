@@ -19,10 +19,10 @@ export default function Offers() {
   return (
     <div className=" w-full mt-6 ">
       <h1 className="text-3xl font-semibold text-center mb-2 font-body">
-        <span className="text-primary1 ">Exclusive Await</span>
+        <span className="text-primary1 ">Accédez a des offres exceptionnelles</span>
       </h1>
       <p className="text-center mb-8 font-body  text-gray-500 ">
-        Unlock Unbeatable Deals for Your Next Stay
+        pour votre prochain séjour
       </p>
 
       <div className="overflow-x-auto scrollbar-hide flex gap-4 p-4 pb-10 sm:flex-col sm:w-full">
@@ -52,7 +52,7 @@ export default function Offers() {
             href={`hotel/${location?._id}`}
             className="btn btn-primary bg-blue-300 text-gl p-4 rounded-lg"
           >
-            Explore
+            Explorez
           </Link>
         </div>
       </div>
