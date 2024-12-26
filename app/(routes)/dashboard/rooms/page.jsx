@@ -122,10 +122,10 @@ export default function RoomsTable() {
     },
     {
       field: 'decimalPrice',
-      headerName: 'promotions',
+      headerName: 'La vision',
       sortable: true,
       filter: true,
-      valueFormatter: (params) => `${params.value} DA`
+      valueFormatter: (params) =>params.value == 1 ? `Disponible` : `Indisponible`
     },
     {
       field: 'reservations',
