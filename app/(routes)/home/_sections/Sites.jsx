@@ -16,6 +16,7 @@ export default function Sites() {
       </h2>
       {Areas.map((Area) => (
         <SiteSection key={Area._id} site={Area} />
+        
       ))}
       <div className="flex flex-col justify-center items-center mt-16">
         <div className=" text-blue-800 text-6xl  font-body sm:text-3xl sm:text-center mb-6 ">
