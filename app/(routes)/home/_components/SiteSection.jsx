@@ -19,6 +19,8 @@ const SiteSection = ({ site }) => {
 
   useEffect(() => {
     getAllRooms({ areaId: site._id });
+    console.log(data);
+    
   }, [site._id]);
 
   if (isLoading) {
