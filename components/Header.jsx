@@ -110,7 +110,7 @@ else{
               <div className="w-[40%] sm:w-full  flex justify-end pr-4">
               <Image src={logo} alt="logo"  sizes={openHeader ? "200px" : "600px"} />
               </div>
-              <span className="w-[60%] sm:w-0 sm:opacity-0 text-white text-start text-xl pl-1">Ministére des sports - algérie <br /> Centre National des Sports <br /> et Loisirs de Tikjda</span>
+              <span className="w-[60%] sm:w-0 sm:opacity-0 text-white text-start text-xl pl-1">Ministére des sports - Algérie <br /> Centre National des Sports <br /> et Loisirs de Tikjda</span>
             </Link>
           )}
           {openHeader && status && (
