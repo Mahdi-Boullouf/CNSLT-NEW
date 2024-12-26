@@ -4,6 +4,7 @@ import ImageUploader from "./ImageUploader";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectContent,
@@ -23,39 +24,65 @@ export default function EditRoom({ room }) {
   const { updateRoom } = useUpdateRoom();
   const { uploadImage } = useUploadImage();
 
-  // Split price into whole number and decimal parts
   const [priceWholeNumber, setPriceWholeNumber] = useState("");
-  const [priceDecimal, setPriceDecimal] = useState("");
+  const [isPromotionEnabled, setIsPromotionEnabled] = useState(false);
+  const [priceDecimal, setPriceDecimal] = useState("0");
 
   const [formData, setFormData] = useState({
     id: room?._id,
     name: room?.name,
     type: room?.type,
     transport: room?.transport,
-    pricePerPerson: room?.pricePerPerson.toString(),
+    pricePerPerson: room?.pricePerPerson?.toString(),
   });
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [existingImages, setExistingImages] = useState(room?.images || []);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Update price inputs when room changes
-  useEffect(() => {
-    if (room?.pricePerPerson) {
-      const priceStr = room.pricePerPerson.toString();
-      const [whole, decimal] = priceStr.split('.');
-      setPriceWholeNumber(whole || "");
-      setPriceDecimal(decimal || "");
-    }
+  // Define handlePriceChange first
+  // Define handlePriceChange first
+const handlePriceChange = useCallback((whole, decimal) => {
+  const pricePerPerson = `${whole || "0"}.${decimal}`;
+  setFormData(prev => ({
+    ...prev,
+    pricePerPerson: pricePerPerson
+  }));
+}, []);
 
-    setFormData({
-      id: room?._id,
-      name: room?.name,
-      type: room?.type,
-      transport: room?.transport,
-      pricePerPerson: room?.pricePerPerson?.toString(),
-    });
-    setExistingImages(room?.images || []);
-  }, [room]);
+// Update handlePromotionToggle with new logic
+const handlePromotionToggle = useCallback((checked) => {
+  setIsPromotionEnabled(checked);
+  // If checked (enabled) use 1, otherwise use 0
+  const newDecimal = checked ? "1" : "0";
+  setPriceDecimal(newDecimal);
+  
+  // Only update price if we have a whole number
+  if (priceWholeNumber) {
+    handlePriceChange(priceWholeNumber, newDecimal);
+  }
+}, [priceWholeNumber, handlePriceChange]);
+
+// Update the useEffect to handle initial state
+useEffect(() => {
+  if (room?.pricePerPerson) {
+    const priceStr = room.pricePerPerson.toString();
+    const [whole, decimal] = priceStr.split('.');
+    setPriceWholeNumber(whole || "");
+    // Check if decimal is 1 to set initial promotion state
+    const hasPromotion = decimal === "1";
+    setPriceDecimal(hasPromotion ? "1" : "0");
+    setIsPromotionEnabled(hasPromotion);
+  }
+
+  setFormData({
+    id: room?._id,
+    name: room?.name,
+    type: room?.type,
+    transport: room?.transport,
+    pricePerPerson: room?.pricePerPerson?.toString(),
+  });
+  setExistingImages(room?.images || []);
+}, [room]);
 
   const handleInputChange = useCallback((e) => {
     const { name, value, type, checked } = e.target;
@@ -65,13 +92,6 @@ export default function EditRoom({ room }) {
     }));
   }, []);
 
-  const handlePriceChange = useCallback((whole, decimal) => {
-    let pricePerPerson = `${whole || "0"}.${decimal || "0"}`;
-    setFormData(prev => ({
-      ...prev,
-      pricePerPerson: pricePerPerson
-    }));
-  }, []);
 
   const handleFilesSelected = useCallback((files) => {
     setSelectedFiles(files);
@@ -104,6 +124,8 @@ export default function EditRoom({ room }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("price data :",formData);
+    
     if (!validateForm()) return;
 
     setIsSubmitting(true);
@@ -189,20 +211,20 @@ export default function EditRoom({ room }) {
                   />
                 </div>
                 <div>
-                  {/* Decimal Part Input */}
-                  <Label>promotion</Label>
-                  <Input
-                    className="rounded-3xl mt-2 w-full"
-                    placeholder="0%"
-                    name="priceDecimal"
-                    type="text"
-                    value={priceDecimal}
-                    onChange={(e) => {
-                      setPriceDecimal(e.target.value);
-                      handlePriceChange(priceWholeNumber, e.target.value);
-                    }}
-                    required
-                  />
+                  {/* Replace Input with Switch for promotion */}
+                  <div className="space-y-2">
+                    <div className="flex justify-center items-center">
+                      {/* <Label>Promotion</Label> */}
+                      <Switch
+                        checked={isPromotionEnabled}
+                        onCheckedChange={handlePromotionToggle}
+                        className=""
+                      />
+                    </div>
+                    <div className="text-xl text-gray-700">
+                      {isPromotionEnabled ? "Disponible" : "Indisponible"}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
