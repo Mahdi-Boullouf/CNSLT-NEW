@@ -8,8 +8,9 @@ import { useCreateReservation } from "@/hooks/useFetchReservation";
 import toast from "react-hot-toast";
 import DialogPaymentReservation from "@/components/DialogPaymentReservation";
 
-const ReservationCard = ({ room, season, price }) => {
+const ReservationCard = ({ room, season, price , status }) => {
   console.log("price : ", price);
+  console.log("price : ", status);
   
   const { id: roomId } = useParams();
   const router = useRouter();
@@ -90,6 +91,7 @@ const ReservationCard = ({ room, season, price }) => {
     <div className="max-w-sm p-6 bg-white rounded-lg shadow-md w-[80%] h-full">
       <div className="flex justify-between">
         <div className="text-lg font-semibold">
+            <p className="text-xl text-red-500">{status === 0 ? `chamber Indisponible` : ``}</p>
             <div>
             {price}
             <span className=" text-gray-500 text-sm">DA</span> / night
