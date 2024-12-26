@@ -61,7 +61,7 @@ export default function DemanderDevis() {
       setErrors((prevErrors) => ({ ...prevErrors, [id]: "" }));
     }
   };
-  const renderInputField = (id, label, type, placeholder) => (
+  const renderInputField = (id, label, type, placeholder , name) => (
     <div className="flex flex-col space-y-1.5">
       <Label htmlFor={id} className="text-gray-500 my-2 text-lg font-semibold">
         {label}
@@ -71,6 +71,7 @@ export default function DemanderDevis() {
         type={type}
         placeholder={placeholder}
         value={formData[id]}
+        name = {name}
         onChange={handleChange}
         className={`ring-0 [&>span]:line-clamp-0 ${
           errors[id] ? "border-red-500" : ""
@@ -116,25 +117,28 @@ export default function DemanderDevis() {
       <div>
       </div>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form action="https://formsubmit.co/zakiiii906@email.com" method="POST">
           <div className="grid w-full items-center gap-4">
             {renderInputField(
               "fullName",
               "Nom de l'entreprise",
               "text",
-              "Veuillez remplir ici"
+              "Veuillez remplir ici",
+              "nom complet"
             )}
             {renderInputField(
               "email",
               "Email",
               "email",
-              "Veuillez remplir ici"
+              "Veuillez remplir ici",
+              "email"
             )}
             {renderInputField(
               "phone",
               "numéro de telephone",
               "tel",
-              "Veuillez remplir ici"
+              "Veuillez remplir ici",
+              "téléphone"
             )}
             {renderSelectField(
               "areaId",
@@ -142,18 +146,20 @@ export default function DemanderDevis() {
               Areas.map((area) => ({
                 value: area.name,
                 label: area.name,
-              }))
+              })),
+              "hotel"
             )}
             {renderSelectField("serviceType", "Sélectionnez le type de service :", [
               { value: "Stage", label: "Stage" },
               { value: "Seminaie", label: "Seminaie" },
-            ])}
+            ], "Service")}
 
             {renderInputField(
               "participantsNumber",
               "Numéro de Participants",
               "number",
-              "Veuillez remplir ici"
+              "Veuillez remplir ici",
+              "Participants"
             )}
             <div className="flex flex-col space-y-1.5">
               <Label
@@ -170,6 +176,7 @@ export default function DemanderDevis() {
                 className={`ring-0 [&>span]:line-clamp-0 ${
                   errors.description ? "border-red-500" : ""
                 }`}
+                name="descrition"
               />
               {errors.description && (
                 <p className="text-red-500 text-sm">{errors.description}</p>
@@ -178,7 +185,7 @@ export default function DemanderDevis() {
             {renderSelectField("needsConvention", "avez-vous une convention ?", [
               { value: "yes", label: "Yes" },
               { value: "no", label: "No" },
-            ])}
+            ] , "convonvention")}
           </div>
           <div className="min-h-12 py-4">
             {formData.needsConvention === "no" && (
