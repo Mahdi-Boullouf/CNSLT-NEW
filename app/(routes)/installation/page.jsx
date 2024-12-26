@@ -70,7 +70,7 @@ export default function Services() {
           </div>
           <div className='flex w-full justify-between h-[300px] mb-7 sm:flex-col'>
             <Image src='/tikjda/E41E0A.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
-            <div className="h-full w-[38%] rounded-xl bg-red-400 text-white flex sm:w-full items-center justify-center text-bold text-4xl text-bold">centre médico sportif</div>
+            <div className="h-full w-[38%] rounded-xl bg-red-400 text-white flex sm:w-full items-center text-center justify-center text-bold text-4xl text-bold">centre médico sportif</div>
           </div>
           <div className='flex w-full justify-between h-[300px] mb-7 sm:flex-col'>
             <div className="h-full w-[38%] rounded-xl bg-orange-400 text-white sm:w-full flex items-center justify-center text-bold text-4xl text-bold">salle de sport</div>
@@ -94,23 +94,24 @@ export default function Services() {
           </div>
           <div className='flex w-full justify-between h-[300px] mb-7 sm:flex-col'>
             <div className="h-full w-[38%] rounded-xl bg-blue-400 text-white flex sm:w-full items-center justify-center text-bold text-4xl text-bold">Piscine olympique</div>
-            <Image src='/fouka/1B1FFD.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
-          </div>
-          <div className='flex w-full justify-between h-[300px] mb-7 sm:flex-col'>
             <Image src='/fouka/3B82F6.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
-            <div className="h-full w-[38%] rounded-xl bg-red-400 text-white flex sm:w-full items-center justify-center text-bold text-4xl text-bold">Bloc Médico sportifs</div>
           </div>
           <div className='flex w-full justify-between h-[300px] mb-7 sm:flex-col'>
-            <div className="h-full w-[38%] rounded-xl bg-green-300 text-white flex sm:w-full items-center justify-center text-bold text-4xl text-bold">Salle de musculation</div>
+            <Image src='/fouka/E41E0A.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
+            <div className="h-full w-[38%] rounded-xl bg-red-400 text-white flex sm:w-full items-center text-center justify-center text-bold text-4xl text-bold">Bloc Médico sportifs</div>
+          </div>
+          <div className='flex w-full justify-between h-[300px] mb-7 sm:flex-col'>
+            <div className="h-full w-[38%] rounded-xl bg-green-300 text-white text-center flex sm:w-full items-center justify-center text-bold text-4xl text-bold">Salle de musculation</div>
             <Image src='/fouka/98E916.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
           </div>
           <div className='flex w-full justify-between h-[300px] sm:mb-12 mb-7 sm:flex-col'>
-            <Image src='/fouka/E5BF12.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
+            <Image src='/fouka/1B1FFD.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
             <div className="h-full w-[38%] rounded-xl bg-blue-600 text-white flex sm:w-full text-center items-center justify-center text-bold text-4xl text-bold">Terrains de beach-volley<br /> plein foret</div>
           </div>
           <div className='flex w-full justify-between h-[300px] mb-7 sm:flex-col'>
             <div className="h-full w-[38%] rounded-xl bg-orange-400 text-white sm:w-full flex items-center justify-center text-bold text-4xl text-center text-bold">Terrains de tennis <br /> plein air</div>
-            <Image src='/fouka/E41E0A.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
+            <Image src='/fouka/E5BF12.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
+            {/* <Image src='/fouka/E41E0A.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" /> */}
           </div>
         </div>
 
