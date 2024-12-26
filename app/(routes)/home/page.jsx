@@ -184,16 +184,16 @@ const changecomponents =()=>{
         
             {
               !statusButton ? (
-                <div className='w-[50%] h-[260px] sm:w-[80%] sm:h-[460px] bg-primary2 border-2 border-solid border-white rounded-lg flex sm:flex-col pl-5 pr-5 items-center justify-around'>
-                  <Link href='../entreprise-association' className='w-[30%] h-[55%] bg-slate-700 border-solid rounded-lg border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
+                <div className='w-[50%] h-[260px] sm:w-[80%] sm:h-[560px] bg-primary2 border-2 border-solid border-white rounded-lg flex sm:flex-col pl-5 pr-5 items-center justify-around'>
+                  <Link href='../entreprise-association' className='w-[30%] h-[55%] bg-slate-700 border-solid rounded-lg border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[80%] sm:h-[30%]'>
                     <span className="text-orange-400 text-lg">Sportifs</span>
                     <span className="text-white">Réservez maintenent et profitez des meilleur offres sportives</span>
                   </Link>
-                  <Link href='/organisme' className='w-[30%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
+                  <Link href='/organisme' className='w-[30%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 text-lg flex flex-col justify-around sm:w-[80%] sm:h-[30%]'>
                     <span className="text-orange-400 text-lg">ORGANISME</span>
                     <span className="text-white">Réservez maintenent et profitez des meilleurs offres sportives</span>
                   </Link>
-                  <Link href={'../reservation'} className='w-[30%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 flex flex-col justify-around sm:w-[60%] sm:h-[40%]'>
+                  <Link href={'../reservation'} className='w-[30%] h-[55%] bg-slate-700 rounded-lg border-solid border-2 border-white p-2 flex flex-col justify-around sm:w-[80%] sm:h-[30%]'>
                     <span className="text-orange-400 text-lg">Large public</span>
                     <span className="text-white">Choisissez la catégorie qui vous convient</span>
                   </Link>
