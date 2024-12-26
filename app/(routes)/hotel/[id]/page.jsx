@@ -51,7 +51,7 @@ export default function page() {
       >
         <div className="sm:flex-col px-24 sm:px-2 w-full h-full flex items-center justify-between bg-gradient-to-r from-black via-white-500 to-transparent bg-opacity-10">
           <div className="w-1/3 h-full flex justify-center items-end pb-16 sm:item-center sm:w-full">
-            <div className="text-white sm:mt-48">
+            <div className="text-white sm:relative sm:top-24 sm:mt-48">
               <div className="uppercase font-semibold text-6xl mb-4">
               {Erea?.name}
               </div>
