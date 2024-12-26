@@ -11,6 +11,7 @@ import { useReservation } from "@/contexts/ReservationContext";
 import { CiMonitor } from "react-icons/ci";
 
 let total = "0";
+let status = "0"
 export default function page({ params }) {
   const {setReservedDays} = useReservation()
   const roomId = params.id
@@ -27,6 +28,7 @@ export default function page({ params }) {
     price = price?.slice(0, -1); 
     const [inSeason = "0", orSeason = "0"] = price?.split(".");
     total = parseInt(inSeason);
+    status = parseInt(orSeason)    
 
     // const no_season = () => {
     //   setSeason("no")
@@ -105,7 +107,7 @@ export default function page({ params }) {
                       <MultiDayCalendar room={data}/>
                 </div>
                 <div className="w-[50%] sm:w-full sm:col-span-3 col-span-1 lg:col-span-3 flex items-center justify-end sm:justify-center sm:mt-4">
-                    <ReservationCard  room={data} season={season} price={total}/>
+                    <ReservationCard  room={data} season={season} price={total} status={status} />
                 </div>
               </div>
               {/* <button className="btn text-xl border-4 border-gray-300 w-36 m-5 p-2 rounded-lg">return</button> */}
