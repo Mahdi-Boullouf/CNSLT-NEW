@@ -44,7 +44,7 @@ export default function Offers() {
       <div className="card-body h-full flex flex-col justify-around p-5 pt-10 ">
         <h2 className="card-title text-primary">{location?.name}</h2>
         <p className="text-sm text-gray-600">
-          Explore the beauty of {location?.name}. Click below for more details!
+          Découvrez l'élégance d'un séjour inoubliable. Cliquez ci-dessous pour plus de détails !
         </p>
         <br />
         <div className="card-actions justify-end">
