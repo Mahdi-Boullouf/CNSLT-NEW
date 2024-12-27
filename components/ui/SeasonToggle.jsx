@@ -85,13 +85,13 @@ export default function SeasonToggle({ summer, setSummer }) {
         className="relative py-1 w-1/2 flex justify-center items-center  rounded-2xl z-30 "
         animate={{ color: summer ? "white" : "white" }}
       >
-        DESVERTS ACTIVITÉS 
+        DIVERS ACTIVITÉS 
       </motion.div>
       <motion.div
         className="relative py-1 w-1/2  text-center rounded-2xl sm:text-lg  z-30 "
         animate={{ color: summer ? "white" : "white" }}
       >
-        <span>SPORTIF</span>
+        <span>SPORTIFS</span>
       </motion.div>
     </div>
   );
