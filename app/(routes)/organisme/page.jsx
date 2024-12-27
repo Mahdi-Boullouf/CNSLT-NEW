@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 // import reservationBg from "@/public/cnsl-images/Entreprise Et Association/3.JPG";
-import events from "@/public/events.jpg";
+import events from "@/public/events.JPG";
 import TypingAnimation from "@/components/TypingAnimation";
 import OfferSpecial from "./_sections/EventSpecial";
 import DemanderDevis from "./_sections/DemanderDevis";
