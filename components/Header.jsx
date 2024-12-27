@@ -200,7 +200,7 @@ else{
         <div className="w-1/3 flex justify-end">
           <div className="flex text-3xl sm:w-0 sm:opacity-0 text-white mr-5 h-12 items-center" onClick={toggleLanguage}>
             {!openHeader && <>
-              عربي<MdLanguage className="ml-1 text-3xl" />
+              عربية<MdLanguage className="ml-1 text-3xl" />
             </>}
           </div>
           <div>
