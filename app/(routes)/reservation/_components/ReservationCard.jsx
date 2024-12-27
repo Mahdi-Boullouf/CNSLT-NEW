@@ -94,7 +94,7 @@ const ReservationCard = ({ room, season, price , status }) => {
             <p className="text-xl text-red-500">{status === 0 ? `chamber Indisponible` : ``}</p>
             <div>
             {price}
-            <span className=" text-gray-500 text-sm">DA</span> / night
+            <span className=" text-gray-500 text-sm">DA</span> / nuit
             </div>
         </div>
       </div>
@@ -109,7 +109,7 @@ const ReservationCard = ({ room, season, price , status }) => {
 
       <button
         className={`w-full mt-4 py-2 text-white rounded-lg ${
-          isReservationValid ? "bg-primary1" : "bg-gray-300 cursor-not-allowed"
+          isReservationValid && status !== 0 ? "bg-primary1" : "bg-gray-300 cursor-not-allowed"
         }`}
         onClick={handleReserve}
         disabled={!isReservationValid}
@@ -118,13 +118,13 @@ const ReservationCard = ({ room, season, price , status }) => {
       </button>
 
       <div className="mt-2 text-sm text-gray-500 text-center">
-      You won't be charged yet
+      Vous ne serez pas facturé encore
       </div>
       <div className="my-4 border-t border-gray-200"></div>
       <div className="text-sm">
         <div className="flex justify-between">
           <span>
-            {price} × {numberOfNights} nights
+            {price} × {numberOfNights} nuits
           </span>
           <span>{price * numberOfNights}</span>
         </div>
