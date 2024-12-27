@@ -135,15 +135,15 @@ export default function Services() {
           </div>
           <div className='flex w-full justify-between h-[300px] mb-7 sm:flex-col'>
             <Image src='/siraidi/FBBA00.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
-            <div className="h-full w-[38%] rounded-xl bg-yellow-500 text-white flex sm:w-full text-center items-center justify-center text-bold text-4xl text-bold">salle de BOXE<br /> plein foret</div>
+            <div className="h-full w-[38%] rounded-xl bg-yellow-500 text-white flex sm:w-full text-center items-center justify-center text-bold text-4xl text-bold">salle de BOXE</div>
           </div>
           <div className='flex w-full justify-between h-[300px] sm:mb-9 mb-7 sm:flex-col'>
-            <div className="h-full w-[38%] rounded-xl bg-pink-600 text-white flex sm:w-full items-center justify-center text-bold text-4xl text-center text-bold">salle de musculation<br /> plein air</div>
+            <div className="h-full w-[38%] rounded-xl bg-pink-600 text-white flex sm:w-full items-center justify-center text-bold text-4xl text-center text-bold">salle de musculation</div>
             <Image src='/siraidi/E5007D.png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
           </div>
           <div className='flex w-full justify-between h-[300px] mb-7 sm:flex-col'>
             <Image src='/siraidi/16DBBA (1).png'  width={400} height={400}  className="h-full sm:w-full w-[58%] rounded-xl" />
-            <div className="h-full w-[38%] rounded-xl bg-blue-300 text-white flex sm:w-full items-center justify-center text-bold text-4xl text-center text-bold">infirmerie<br /> plein air</div>
+            <div className="h-full w-[38%] rounded-xl bg-blue-300 text-white flex sm:w-full items-center justify-center text-bold text-4xl text-center text-bold">infirmerie</div>
           </div>
         </div>
 
