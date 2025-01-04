@@ -50,7 +50,7 @@ export default function Services() {
         </div>
         <div
            className=' sm:px-2 flex items-end  sm:items-center  pb-32 sm:pb-8 px-12   bg-gradient-to-tr  from-black  bg-opacity-10 sm:h-[60vh] h-screen w-full absolute top-0 ' >
-      <TypingAnimation text='Installation' 
+      <TypingAnimation text='INSTALLATIOS SPORTIVES' 
       className='text-7xl sm:text-5xl text-white font-body' />
       </div>
       </div>
