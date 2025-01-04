@@ -106,7 +106,9 @@ const ReservationCard = ({ room, season, price , status }) => {
           {renderDateSection("CHECKOUT", selectedDates.to)}
         </div>
       </div>
-
+      {
+        status !== 0 ? (
+          
       <button
         className={`w-full mt-4 py-2 text-white rounded-lg ${
           isReservationValid && status !== 0 ? "bg-primary1" : "bg-gray-300 cursor-not-allowed"
@@ -116,6 +118,18 @@ const ReservationCard = ({ room, season, price , status }) => {
       >
         Reserve
       </button>
+          ):(
+            
+      <button
+        className={`w-full mt-4 py-2 text-white rounded-lg bg-gray-300 cursor-not-allowed`}
+        
+        disabled={!isReservationValid}
+      >
+        Reserve
+      </button>
+          )
+      }
+      
 
       <div className="mt-2 text-sm text-gray-500 text-center">
       Vous ne serez pas facturé encore
