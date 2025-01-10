@@ -1,8 +1,8 @@
 // hooks/useFetchRoom.js
-import { useState  } from 'react';
-import axios from 'axios';
-import { useAuth } from '@/contexts/AuthContext';
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+import { useState } from "react";
+import axios from "axios";
+import { useAuth } from "@/contexts/AuthContext";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export function useCreateReservation() {
   const { token } = useAuth();
@@ -13,14 +13,21 @@ export function useCreateReservation() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`${BASE_URL}/reservation/create/`, reservationData , { headers: {
-        Authorization: token, 
-      }});
+      const response = await axios.post(
+        `${BASE_URL}/reservation/create/`,
+        reservationData,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
 
       setData(response.data.data);
+      window.open(response.data.data.checkoutUrl);
       return response.data;
     } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred');
+      setError(err.response?.data?.message || "An error occurred");
       throw err;
     } finally {
       setIsLoading(false);
@@ -30,32 +37,33 @@ export function useCreateReservation() {
   return { data, error, isLoading, createReservation };
 }
 
-
 export function useGetAllReservation() {
-    const { token  } = useAuth();
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const GetAllReservation = async (data) => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response = await axios.post(`${BASE_URL}/reservation/all`,data,{ headers: {
-          Authorization: token, 
-        }});
-        setData(response.data.data);
-        return response.data;
-      } catch (err) {
-        setError(err.response?.data?.message || 'An error occurred');
-        throw err;
-      } finally {
-        setIsLoading(false);
-      }
-    };
-  
-    return { data, error, isLoading, GetAllReservation };
-  }
-  
+  const { token } = useAuth();
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const GetAllReservation = async (data) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post(`${BASE_URL}/reservation/all`, data, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      setData(response.data.data);
+      return response.data;
+    } catch (err) {
+      setError(err.response?.data?.message || "An error occurred");
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { data, error, isLoading, GetAllReservation };
+}
+
 export function useConfirmRoomReservation() {
   const { token } = useAuth();
 
@@ -66,13 +74,19 @@ export function useConfirmRoomReservation() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`${BASE_URL}/room/reserve`,{reservationId:Data},{ headers: {
-        Authorization: token, 
-      }});
+      const response = await axios.post(
+        `${BASE_URL}/room/reserve`,
+        { reservationId: Data },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
       setData(response.data);
       return response.data;
     } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred');
+      setError(err.response?.data?.message || "An error occurred");
       throw err;
     } finally {
       setIsLoading(false);
@@ -92,13 +106,19 @@ export function useRefuseRoomReservation() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`${BASE_URL}/room/refuse`,{reservationId:Data},{ headers: {
-        Authorization: token, 
-      }});
+      const response = await axios.post(
+        `${BASE_URL}/room/refuse`,
+        { reservationId: Data },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
       setData(response.data);
       return response.data;
     } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred');
+      setError(err.response?.data?.message || "An error occurred");
       throw err;
     } finally {
       setIsLoading(false);
@@ -119,13 +139,19 @@ export function useDeleteReservation() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`${BASE_URL}/reservation/delete`,{reservationId},{ headers: {
-        Authorization: token, 
-      }});
+      const response = await axios.post(
+        `${BASE_URL}/reservation/delete`,
+        { reservationId },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
       setData(response.data);
       return response.data;
     } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred');
+      setError(err.response?.data?.message || "An error occurred");
       throw err;
     } finally {
       setIsLoading(false);

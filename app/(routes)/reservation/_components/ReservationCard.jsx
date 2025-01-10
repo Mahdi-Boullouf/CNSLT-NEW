@@ -8,10 +8,10 @@ import { useCreateReservation } from "@/hooks/useFetchReservation";
 import toast from "react-hot-toast";
 import DialogPaymentReservation from "@/components/DialogPaymentReservation";
 
-const ReservationCard = ({ room, season, price , status }) => {
+const ReservationCard = ({ room, season, price, status }) => {
   console.log("price : ", price);
   console.log("price : ", status);
-  
+
   const { id: roomId } = useParams();
   const router = useRouter();
   const { user } = useAuth();
@@ -30,7 +30,7 @@ const ReservationCard = ({ room, season, price , status }) => {
         : 0,
     [selectedDates]
   );
-  
+
   let total = price * numberOfNights;
 
   // Function to validate reservation dates
@@ -44,14 +44,15 @@ const ReservationCard = ({ room, season, price , status }) => {
     else if (isReservationValid) setIsConfirmationOpen(true);
   };
 
-  const handleConfirmReservation = async (event) => {
-    event.preventDefault();
+  const handleConfirmReservation = async (type) => {
+    // event.preventDefault();
     setIsConfirming(true);
     try {
       const result = await createReservation({
         roomId,
         from: format(selectedDates.from, "yyyy-MM-dd"),
         to: format(selectedDates.to, "yyyy-MM-dd"),
+        paymentType: type,
       });
 
       toast.success(result.message);
@@ -68,9 +69,11 @@ const ReservationCard = ({ room, season, price , status }) => {
       setIsConfirmationOpen(false);
 
       // Open payment dialog
-      setIsPaymentOpen(true);
+      // setIsPaymentOpen(true);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to create reservation");
+      toast.error(
+        error.response?.data?.message || "Failed to create reservation"
+      );
     } finally {
       setIsConfirming(false);
     }
@@ -86,16 +89,18 @@ const ReservationCard = ({ room, season, price , status }) => {
       <span>{date ? format(date, "MM/dd/yyyy") : "Select date"}</span>
     </div>
   );
-  
+
   return (
     <div className="max-w-sm p-6 bg-white rounded-lg shadow-md w-[80%] h-full">
       <div className="flex justify-between">
         <div className="text-lg font-semibold">
-            <p className="text-xl text-red-500">{status === 0 ? `chamber Indisponible` : ``}</p>
-            <div>
+          <p className="text-xl text-red-500">
+            {status === 0 ? `chamber Indisponible` : ``}
+          </p>
+          <div>
             {price}
             <span className=" text-gray-500 text-sm">DA</span> / nuit
-            </div>
+          </div>
         </div>
       </div>
       <div className="my-4 border-t border-gray-200"></div>
@@ -106,33 +111,29 @@ const ReservationCard = ({ room, season, price , status }) => {
           {renderDateSection("CHECKOUT", selectedDates.to)}
         </div>
       </div>
-      {
-        status !== 0 ? (
-          
-      <button
-        className={`w-full mt-4 py-2 text-white rounded-lg ${
-          isReservationValid && status !== 0 ? "bg-primary1" : "bg-gray-300 cursor-not-allowed"
-        }`}
-        onClick={handleReserve}
-        disabled={!isReservationValid}
-      >
-        Reserve
-      </button>
-          ):(
-            
-      <button
-        className={`w-full mt-4 py-2 text-white rounded-lg bg-gray-300 cursor-not-allowed`}
-        
-        disabled={!isReservationValid}
-      >
-        Reserve
-      </button>
-          )
-      }
-      
+      {status !== 0 ? (
+        <button
+          className={`w-full mt-4 py-2 text-white rounded-lg ${
+            isReservationValid && status !== 0
+              ? "bg-primary1"
+              : "bg-gray-300 cursor-not-allowed"
+          }`}
+          onClick={handleReserve}
+          disabled={!isReservationValid}
+        >
+          Reserve
+        </button>
+      ) : (
+        <button
+          className={`w-full mt-4 py-2 text-white rounded-lg bg-gray-300 cursor-not-allowed`}
+          disabled={!isReservationValid}
+        >
+          Reserve
+        </button>
+      )}
 
       <div className="mt-2 text-sm text-gray-500 text-center">
-      Vous ne serez pas facturé encore
+        Vous ne serez pas facturé encore
       </div>
       <div className="my-4 border-t border-gray-200"></div>
       <div className="text-sm">
