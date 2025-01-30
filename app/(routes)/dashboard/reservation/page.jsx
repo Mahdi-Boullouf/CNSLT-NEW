@@ -329,7 +329,7 @@ export default function Reservation() {
           </div>
           <div>
             <DownloadButton
-              url="https://api.cnsl-tikjda.com/api/reservation/export"
+              url="https://api.cnsl-tikjda.dz/api/reservation/export"
               title="Download Reservation"
               className="border  bg-transparent border-primary1 text-primary1 hover:bg-primary1  hover:text-white  rounded-full font-bold text-lg"
             />
