@@ -5,20 +5,30 @@ import { Input } from "@/components/ui/input";
 import { FcAddImage } from "react-icons/fc";
 import { getUrlImage } from "@/lib/assistant";
 
-function ImageUploader({ onFilesSelected, selectedFiles, existingImages = [], setExistingImages, maxImages = 10 }) {
+function ImageUploader({
+  onFilesSelected,
+  selectedFiles,
+  existingImages = [],
+  setExistingImages,
+  maxImages = 10,
+}) {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
   const dropZoneRef = useRef(null);
 
   const totalImages = existingImages.length + selectedFiles.length;
   const canAddMore = totalImages < maxImages;
-
-  const handleFiles = useCallback((newFiles) => {
-    const validFiles = Array.from(newFiles).filter(file => file.type.startsWith('image/'));
-    const remainingSlots = maxImages - totalImages;
-    const filesToAdd = validFiles.slice(0, remainingSlots);
-    onFilesSelected([...selectedFiles, ...filesToAdd]);
-  }, [selectedFiles, onFilesSelected, totalImages, maxImages]);
+  const handleFiles = useCallback(
+    (newFiles) => {
+      const validFiles = Array.from(newFiles).filter((file) =>
+        file.type.startsWith("image/")
+      );
+      const remainingSlots = maxImages - totalImages;
+      const filesToAdd = validFiles.slice(0, remainingSlots);
+      onFilesSelected([...selectedFiles, ...filesToAdd]);
+    },
+    [selectedFiles, onFilesSelected, totalImages, maxImages]
+  );
 
   const handleFileChange = (event) => {
     handleFiles(event.target.files);
@@ -41,13 +51,16 @@ function ImageUploader({ onFilesSelected, selectedFiles, existingImages = [], se
     e.stopPropagation();
   }, []);
 
-  const handleDrop = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-    const { files } = e.dataTransfer;
-    handleFiles(files);
-  }, [handleFiles]);
+  const handleDrop = useCallback(
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(false);
+      const { files } = e.dataTransfer;
+      handleFiles(files);
+    },
+    [handleFiles]
+  );
 
   const handleRemoveImage = (index) => {
     const updatedFiles = selectedFiles.filter((_, i) => i !== index);
@@ -75,11 +88,11 @@ function ImageUploader({ onFilesSelected, selectedFiles, existingImages = [], se
         multiple
         className="hidden"
       />
-      
-      <div 
+
+      <div
         ref={dropZoneRef}
         className={`flex flex-wrap gap-4 p-4 border-2 border-dashed rounded-lg transition-colors ${
-          isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
+          isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"
         }`}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
@@ -87,24 +100,24 @@ function ImageUploader({ onFilesSelected, selectedFiles, existingImages = [], se
         onDrop={handleDrop}
       >
         {canAddMore && (
-          <Button 
+          <Button
             className="w-32 h-32 rounded-lg flex items-center justify-center"
-            variant="outline" 
+            variant="outline"
             onClick={handleAddMore}
           >
-            {isDragging ? 'Drop here' : (
+            {isDragging ? (
+              "Drop here"
+            ) : (
               <div className="flex flex-col items-center justify-center">
                 <FcAddImage className="h-8 w-8" />
-                <div className="font-raleway font-semibold">
-                  Add Image
-                </div>
+                <div className="font-raleway font-semibold">Add Image</div>
               </div>
             )}
           </Button>
         )}
         {existingImages.map((imageUrl, index) => (
           <div key={`existing-${index}`} className="relative">
-            <img 
+            <img
               src={getUrlImage(imageUrl)}
               alt={`Existing ${index}`}
               className="w-32 h-32 object-cover rounded"
