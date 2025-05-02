@@ -14,7 +14,7 @@ export function useGetAllRooms() {
     setError(null);
 
     try {
-      const response = await axios.get(`${BASE_URL}/room/all`, Data);
+      const response = await axios.post(`${BASE_URL}/room/all`, Data);
       setData(response?.data.data);
       return response?.data;
     } catch (err) {

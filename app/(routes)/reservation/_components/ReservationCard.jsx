@@ -9,9 +9,6 @@ import toast from "react-hot-toast";
 import DialogPaymentReservation from "@/components/DialogPaymentReservation";
 
 const ReservationCard = ({ room, season, price, status }) => {
-  console.log("price : ", price);
-  console.log("price : ", status);
-
   const { id: roomId } = useParams();
   const router = useRouter();
   const { user } = useAuth();

@@ -33,8 +33,31 @@ export function useCreateReservation() {
       setIsLoading(false);
     }
   };
+  const createAdminReservation = async (reservationData) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/reservation/create/admin`,
+        reservationData,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
 
-  return { data, error, isLoading, createReservation };
+      setData(response.data.data);
+      return response.data;
+    } catch (err) {
+      setError(err.response?.data?.message || "An error occurred");
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { data, error, isLoading, createReservation, createAdminReservation };
 }
 
 export function useGetAllReservation() {

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import MultiDayCalendar from "../_components/MultiDayCalendar";
 import EventDayCalender from "../_components/EventDayCalender";
 import DetailsRoom from "../_sections/DetailsRoom";
@@ -11,39 +11,37 @@ import { useReservation } from "@/contexts/ReservationContext";
 import { CiMonitor } from "react-icons/ci";
 
 let total = "0";
-let status = "0"
+let status = "0";
 export default function page({ params }) {
-  const {setReservedDays} = useReservation()
-  const roomId = params.id
-    const { data, error, isLoading, getRoomById } = useGetRoomById();
-    const [season , setSeason ] = useState('no');
-  
-    useEffect(() => {
-      getRoomById(roomId);
-      console.log(data);
-      
-    }, [roomId]);
+  const { setReservedDays } = useReservation();
+  const roomId = params.id;
+  const { data, error, isLoading, getRoomById } = useGetRoomById();
+  const [season, setSeason] = useState("no");
 
-    let price = data?.pricePerPerson.toString() || "0";
-    price = price?.slice(0, -1); 
-    const [inSeason = "0", orSeason = "0"] = price?.split(".");
-    total = parseInt(inSeason);
-    status = parseInt(orSeason)    
+  useEffect(() => {
+    getRoomById(roomId);
+    console.log(data);
+  }, [roomId]);
 
-    // const no_season = () => {
-    //   setSeason("no")
-    // }
-    // const in_season = () => {
-    //   setSeason("in")
-    // }
-    // const or_season = () => {
-    //   total = parseInt(orSeason);
-    //   setSeason("or")
-    // }
-    // const events = () => {
-    //   total = "8000"
-    //   setSeason("event")
-    // }
+  let price = data?.pricePerPerson.toString() || "0";
+  const [inSeason = "0", orSeason = "0"] = price?.split(".");
+  total = parseInt(inSeason);
+  status = parseInt(orSeason);
+
+  // const no_season = () => {
+  //   setSeason("no")
+  // }
+  // const in_season = () => {
+  //   setSeason("in")
+  // }
+  // const or_season = () => {
+  //   total = parseInt(orSeason);
+  //   setSeason("or")
+  // }
+  // const events = () => {
+  //   total = "8000"
+  //   setSeason("event")
+  // }
 
   return (
     <div className=" container pt-40 ">
@@ -94,27 +92,32 @@ export default function page({ params }) {
             </div>
 
           ): season === 'in' || season === 'or' || season === 'event' ?( */}
-            <div className="flex flex-col w-full">
-              <div className="flex justify-around w-full sm:flex-col">
-                <div className="   col-span-2 lg:col-span-3">
-                  {/* {
+        <div className="flex flex-col w-full">
+          <div className="flex justify-around w-full sm:flex-col">
+            <div className="   col-span-2 lg:col-span-3">
+              {/* {
                     season === 'event' ?(
                       <EventDayCalender room={data}/>
                     ):(
                       <MultiDayCalendar room={data}/>
                       )
                       } */}
-                      <MultiDayCalendar room={data}/>
-                </div>
-                <div className="w-[50%] sm:w-full sm:col-span-3 col-span-1 lg:col-span-3 flex items-center justify-end sm:justify-center sm:mt-4">
-                    <ReservationCard  room={data} season={season} price={total} status={status} />
-                </div>
-              </div>
-              {/* <button className="btn text-xl border-4 border-gray-300 w-36 m-5 p-2 rounded-lg">return</button> */}
+              <MultiDayCalendar room={data} />
             </div>
-          {/* // ):( */}
-          {/* //   <div>no date !</div> */}
-          {/* // ) */}
+            <div className="w-[50%] sm:w-full sm:col-span-3 col-span-1 lg:col-span-3 flex items-center justify-end sm:justify-center sm:mt-4">
+              <ReservationCard
+                room={data}
+                season={season}
+                price={total}
+                status={status}
+              />
+            </div>
+          </div>
+          {/* <button className="btn text-xl border-4 border-gray-300 w-36 m-5 p-2 rounded-lg">return</button> */}
+        </div>
+        {/* // ):( */}
+        {/* //   <div>no date !</div> */}
+        {/* // ) */}
         {/* } */}
         {/* <div className="   col-span-2 lg:col-span-3">
           <MultiDayCalendar room={data}/>
@@ -123,7 +126,6 @@ export default function page({ params }) {
           <ReservationCard  room={data} season={season} />
         </div> */}
       </div>
-
     </div>
   );
 }
